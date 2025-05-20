@@ -17,7 +17,7 @@ namespace BiggyTools.FFmpeg
 
         public static void RunFFmpeg(string inputFile, int cqpQuality)
         {
-            var outputFileName = GetOutputFilename(inputFile);
+            var outputFileName = GetOutputFilename(inputFile, cqpQuality);
 
             var ffmpegArgs = $"-i \"{inputFile}\" -c:v hevc_nvenc -rc vbr -cq {cqpQuality} -c:a copy -map 0 \"{outputFileName}\"";
 
@@ -41,13 +41,13 @@ namespace BiggyTools.FFmpeg
             process.WaitForExit();
         }
 
-        public static string GetOutputFilename(string inputFilePath)
+        public static string GetOutputFilename(string inputFilePath, int cqpQuality)
         {
             var directory = Path.GetDirectoryName(inputFilePath);
             var fileNameWithoutExt = Path.GetFileNameWithoutExtension(inputFilePath);
             var extention = Path.GetExtension(inputFilePath);
 
-            var newFilename = $"{fileNameWithoutExt} [Re-Encoded]{extention}";
+            var newFilename = $"{fileNameWithoutExt} [Re-Encoded(CQP: {cqpQuality})]{extention}";
 
             return Path.Combine(directory ?? "", newFilename);   
         }
