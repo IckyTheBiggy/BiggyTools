@@ -1,6 +1,5 @@
 # BiggyTools
 
-## Dependencies
-
-fzf
-ffmpeg
+### Dependencies
+- fzf
+- ffmpeg
