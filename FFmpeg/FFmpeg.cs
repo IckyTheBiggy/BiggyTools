@@ -5,21 +5,46 @@ namespace BiggyTools.FFmpeg
 {
     public class Utils
     {
+        private static string? _encoderType;
+        private static bool _compatabilityMode = false;
+
         public static void StartRencode()
         {
             var input = Files.Helper.GetFileWithFzf();
+            var mode = AnsiConsole.Prompt(
+                new SelectionPrompt<string>()
+                .Title("[green]Re-Encode With Compatability Mode(H.264, mp4)[/]")
+                .PageSize(8)
+                .AddChoices(new[] {
+                    "no",
+                    "yes"
+                }));
+
             var quality = AnsiConsole.Ask<int>("Enter [yellow]CQP Quality (e.g. 20)[/]");
 
+            switch (mode)
+            {
+                case "no":
+                    _encoderType = "hevc_nvenc";
+                    break;
+
+                case "yes":
+                    _encoderType = "h264_nvenc";
+                    _compatabilityMode = true;
+                    break;
+            }
+
             if (input == null) return;
-            
-            RunFFmpeg(input, quality);
+            if (_encoderType == null) return;
+
+            RunFFmpeg(input, _encoderType, quality);
         }
 
-        public static void RunFFmpeg(string inputFile, int cqpQuality)
+        public static void RunFFmpeg(string inputFile, string encoderType, int cqpQuality)
         {
             var outputFileName = GetOutputFilename(inputFile, cqpQuality);
 
-            var ffmpegArgs = $"-i \"{inputFile}\" -c:v hevc_nvenc -rc vbr -cq {cqpQuality} -c:a copy -map 0 \"{outputFileName}\"";
+            var ffmpegArgs = $"-i \"{inputFile}\" -c:v {encoderType} -rc vbr -cq {cqpQuality} -c:a copy -map 0 \"{outputFileName}\"";
 
             var startInfo = new ProcessStartInfo
             {
@@ -47,7 +72,12 @@ namespace BiggyTools.FFmpeg
             var fileNameWithoutExt = Path.GetFileNameWithoutExtension(inputFilePath);
             var extention = Path.GetExtension(inputFilePath);
 
-            var newFilename = $"{fileNameWithoutExt} [Re-Encoded(CQP: {cqpQuality})]{extention}";
+            if (_compatabilityMode)
+            {
+                extention = ".mp4";
+            }
+
+            var newFilename = $"{fileNameWithoutExt} [Re-Encoded(CQP:{cqpQuality})]{extention}";
 
             return Path.Combine(directory ?? "", newFilename);   
         }
