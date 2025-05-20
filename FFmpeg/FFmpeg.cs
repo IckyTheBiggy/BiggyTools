@@ -6,14 +6,14 @@ namespace BiggyTools.FFmpeg
     public class Utils
     {
         private static string? _encoderType;
-        private static bool _compatabilityMode = false;
+        private static bool _compatibilityMode = false;
 
         public static void StartRencode()
         {
             var input = Files.Helper.GetFileWithFzf();
             var mode = AnsiConsole.Prompt(
                 new SelectionPrompt<string>()
-                .Title("[green]Re-Encode With Compatability Mode(H.264, mp4)[/]")
+                .Title("[green]Re-Encode With Compatibility Mode(H.264, mp4)[/]")
                 .PageSize(8)
                 .AddChoices(new[] {
                     "no",
@@ -30,7 +30,7 @@ namespace BiggyTools.FFmpeg
 
                 case "yes":
                     _encoderType = "h264_nvenc";
-                    _compatabilityMode = true;
+                    _compatibilityMode = true;
                     break;
             }
 
@@ -72,7 +72,7 @@ namespace BiggyTools.FFmpeg
             var fileNameWithoutExt = Path.GetFileNameWithoutExtension(inputFilePath);
             var extention = Path.GetExtension(inputFilePath);
 
-            if (_compatabilityMode)
+            if (_compatibilityMode)
             {
                 extention = ".mp4";
             }
