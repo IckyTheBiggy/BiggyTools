@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "nGTYyDp+GY4=",
+  "success": true,
+  "projectFilePath": "/home/bnn/Development/C#/BiggyTools/BiggyTools.csproj",
+  "expectedPackageFiles": [
+    "/home/bnn/.nuget/packages/microsoft.aspnetcore.app.ref/9.0.4/microsoft.aspnetcore.app.ref.9.0.4.nupkg.sha512"
+  ],
+  "logs": []
+}
