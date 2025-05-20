@@ -13,3 +13,7 @@
 /home/bnn/Development/C#/BiggyTools/obj/Debug/net9.0/BiggyTools.pdb
 /home/bnn/Development/C#/BiggyTools/obj/Debug/net9.0/BiggyTools.genruntimeconfig.cache
 /home/bnn/Development/C#/BiggyTools/obj/Debug/net9.0/ref/BiggyTools.dll
+/home/bnn/Development/C#/BiggyTools/bin/Debug/net9.0/Spectre.Console.dll
+/home/bnn/Development/C#/BiggyTools/bin/Debug/net9.0/Xabe.FFmpeg.dll
+/home/bnn/Development/C#/BiggyTools/obj/Debug/net9.0/BiggyTools.csproj.AssemblyReference.cache
+/home/bnn/Development/C#/BiggyTools/obj/Debug/net9.0/BiggyTools.csproj.Up2Date

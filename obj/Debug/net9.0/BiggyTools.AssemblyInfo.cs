@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("BiggyTools")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+0564f3f4d7dc63b412c19b6b68cbccfbdde7153b")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+7b587b5e78b616a5e72e7987c6039e4364373b36")]
 [assembly: System.Reflection.AssemblyProductAttribute("BiggyTools")]
 [assembly: System.Reflection.AssemblyTitleAttribute("BiggyTools")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
