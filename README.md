@@ -1,0 +1,6 @@
+# BiggyTools
+
+## Dependencies
+
+fzf
+ffmpeg
