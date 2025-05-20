@@ -3,13 +3,15 @@ using Spectre.Console;
 
 namespace BiggyTools.FFmpeg
 {
-    class Utils
+    public class Utils
     {
         public static void StartRencode()
         {
-            var input = AnsiConsole.Ask<string>("Enter path to [blue]input file[/]:");
+            var input = Files.Helper.GetFileWithFzf();
             var quality = AnsiConsole.Ask<int>("Enter [yellow]CQP Quality (e.g. 20)[/]");
 
+            if (input == null) return;
+            
             RunFFmpeg(input, quality);
         }
 
