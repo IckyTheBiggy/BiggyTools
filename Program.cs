@@ -1,5 +1,4 @@
-﻿using BiggyTools.Debugging;
-using OpenTK.Mathematics;
+﻿using OpenTK.Mathematics;
 using OpenTK.Windowing.Desktop;
 using Rendering.UI;
 using Spectre.Console;

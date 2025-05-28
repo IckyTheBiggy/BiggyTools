@@ -21,6 +21,8 @@ namespace Rendering.UI
 
             if (ImGui.Button("Close"))
             {
+                this.IsVisible = false;
+                _imGuiController.Dispose();
                 this.Close();
             }
 
