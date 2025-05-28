@@ -15,7 +15,9 @@ namespace BiggyTools
 
         public static void Main(string[] args)
         {
-            var option = AnsiConsole.Prompt(
+            while (true)
+            {
+                var option = AnsiConsole.Prompt(
                 new SelectionPrompt<string>()
                 .Title("[green]BiggyTools[/]")
                 .PageSize(10)
@@ -25,16 +27,20 @@ namespace BiggyTools
                     "Exit"
                 }));
 
-            switch (option)
-            {
-                case "Re-Encode Video":
-                    FFmpeg.Utils.StartRencode();
-                    break;
+                switch (option)
+                {
+                    case "Re-Encode Video":
+                        FFmpeg.Utils.StartRencode();
+                        break;
 
-                case "UI":
-                    UIWindow uIWindow = new UIWindow(GameWindowSettings.Default, nativeWindowSettings);
-                    uIWindow.Run();
-                    break;
+                    case "UI":
+                        UIWindow uIWindow = new UIWindow(GameWindowSettings.Default, nativeWindowSettings);
+                        uIWindow.Run();
+                        break;
+
+                    case "Exit":
+                        return;
+                }
             }
         }
     }

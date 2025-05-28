@@ -21,7 +21,7 @@ namespace Rendering.UI
 
             if (ImGui.Button("Close"))
             {
-                Close();
+                this.Close();
             }
 
             ImGui.End();
