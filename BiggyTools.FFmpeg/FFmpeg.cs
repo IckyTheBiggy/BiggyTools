@@ -11,6 +11,8 @@ namespace BiggyTools.FFmpeg
         public static void StartRencode()
         {
             var input = Files.Helper.GetFileWithFzf();
+            if (input == null) return;
+            
             var mode = AnsiConsole.Prompt(
                 new SelectionPrompt<string>()
                 .Title("[green]Re-Encode With Compatibility Mode(H.264, mp4)[/]")
