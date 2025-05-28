@@ -1,6 +1,6 @@
+using BiggyTools.Debugging;
 using ImGuiNET;
 using OpenTK.Graphics.OpenGL4;
-using OpenTK.Mathematics;
 using OpenTK.Windowing.Common;
 using OpenTK.Windowing.Desktop;
 
@@ -12,13 +12,18 @@ namespace Rendering.UI
 
         public UIWindow(GameWindowSettings gameWindowSettings, NativeWindowSettings nativeWindowSettings) : base(gameWindowSettings, nativeWindowSettings)
         {
-            
+
         }
 
         private void RenderUI()
         {
             ImGui.Begin("Biggy Tools");
-            ImGui.Text("BiggyTools");
+
+            if (ImGui.Button("Close"))
+            {
+                Close();
+            }
+
             ImGui.End();
         }
 
@@ -64,6 +69,13 @@ namespace Rendering.UI
             base.OnUnload();
 
             _imGuiController.Dispose();
+        }
+
+        public override void Close()
+        {
+            base.Close();
+
+            Logger.Log("UIWindow::Closed Window");
         }
     }
 }
