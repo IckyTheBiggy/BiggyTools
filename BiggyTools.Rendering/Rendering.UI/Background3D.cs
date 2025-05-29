@@ -122,6 +122,7 @@ namespace Rendering.UI
 
         public static void HandleResize(ResizeEventArgs e, GameWindow window)
         {
+
             GL.Viewport(0, 0, e.Width, e.Height);
 
             _projectionMatrix = Matrix4.CreatePerspectiveFieldOfView(MathHelper.DegreesToRadians(45f), (float)window.Size.X / window.Size.Y, 0.1f, 100f);

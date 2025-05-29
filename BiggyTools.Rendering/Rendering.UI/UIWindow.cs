@@ -1,5 +1,8 @@
+using System.Drawing;
 using BiggyTools.Debugging;
+using ImGuiNET;
 using OpenTK.Graphics.OpenGL4;
+using OpenTK.Mathematics;
 using OpenTK.Windowing.Common;
 using OpenTK.Windowing.Desktop;
 
@@ -18,7 +21,11 @@ namespace Rendering.UI
         {
             base.OnLoad();
 
-            GL.ClearColor(0.23f, 0.23f, 0.22f, 1.0f);
+            ImGui.CreateContext();
+            ImGui.SetCurrentContext(ImGui.GetCurrentContext());
+
+            Color4 clearColor = new Color4(ImGuiUI.BackgroundClearColor.X, ImGuiUI.BackgroundClearColor.Y, ImGuiUI.BackgroundClearColor.Z, ImGuiUI.BackgroundClearColor.W);
+            GL.ClearColor(clearColor);
 
             Background3D.HandleOnLoad(this);
 
