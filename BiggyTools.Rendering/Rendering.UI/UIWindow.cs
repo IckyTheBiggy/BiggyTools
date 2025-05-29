@@ -1,6 +1,4 @@
-using System.Numerics;
 using BiggyTools.Debugging;
-using ImGuiNET;
 using OpenTK.Graphics.OpenGL4;
 using OpenTK.Windowing.Common;
 using OpenTK.Windowing.Desktop;
@@ -16,16 +14,13 @@ namespace Rendering.UI
 
         }
 
-        private void RenderUI()
-        {
-            ImGuiUI.Render();
-        }
-
         protected override void OnLoad()
         {
             base.OnLoad();
 
-            GL.ClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+            GL.ClearColor(0.23f, 0.23f, 0.22f, 1.0f);
+
+            Background3D.HandleOnLoad(this);
 
             _imGuiController = new ImGuiController(ClientSize.X, ClientSize.Y);
         }
@@ -41,9 +36,11 @@ namespace Rendering.UI
 
             GL.Clear(ClearBufferMask.ColorBufferBit | ClearBufferMask.DepthBufferBit);
 
+            Background3D.HandleOnRenderFrame(args);
+
             _imGuiController.Update(this, (float)args.Time);
 
-            RenderUI();
+            ImGuiUI.Render();
 
             _imGuiController.Render();
 
@@ -56,6 +53,8 @@ namespace Rendering.UI
 
             GL.Viewport(0, 0, ClientSize.X, ClientSize.Y);
             _imGuiController.WindowResized(ClientSize.X, ClientSize.Y);
+
+            Background3D.HandleResize(e, this);
         }
 
         protected override void OnUnload()
@@ -63,6 +62,8 @@ namespace Rendering.UI
             base.OnUnload();
 
             _imGuiController.Dispose();
+
+            Background3D.HandleUnload();
         }
 
         public override void Close()
