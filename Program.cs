@@ -35,6 +35,7 @@ namespace BiggyTools
 
                     case "UI":
                         UIWindow uIWindow = new UIWindow(GameWindowSettings.Default, nativeWindowSettings);
+                        uIWindow.MinimumSize = new Vector2i(400, 300);
                         uIWindow.Run();
                         break;
 
