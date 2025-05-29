@@ -1,3 +1,4 @@
+using System.Numerics;
 using BiggyTools.Debugging;
 using ImGuiNET;
 using OpenTK.Graphics.OpenGL4;
@@ -17,16 +18,7 @@ namespace Rendering.UI
 
         private void RenderUI()
         {
-            ImGui.Begin("Biggy Tools");
-
-            if (ImGui.Button("Close"))
-            {
-                this.IsVisible = false;
-                _imGuiController.Dispose();
-                this.Close();
-            }
-
-            ImGui.End();
+            ImGuiUI.Render();
         }
 
         protected override void OnLoad()
