@@ -16,6 +16,8 @@ namespace Rendering.UI
         public UIWindow(GameWindowSettings gameWindowSettings, NativeWindowSettings nativeWindowSettings) : base(gameWindowSettings, nativeWindowSettings)
         {
             GL.LoadBindings(new GLFWBindingsContext());
+
+            _imGuiController = new ImGuiController(ClientSize.X, ClientSize.Y);
         }
 
         protected override void OnLoad()
@@ -29,8 +31,6 @@ namespace Rendering.UI
             GL.ClearColor(clearColor);
 
             Background3D.HandleOnLoad(this);
-
-            _imGuiController = new ImGuiController(ClientSize.X, ClientSize.Y);
         }
 
         protected override void OnUpdateFrame(FrameEventArgs args)
