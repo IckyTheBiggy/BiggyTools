@@ -5,6 +5,7 @@ using OpenTK.Graphics.OpenGL4;
 using OpenTK.Mathematics;
 using OpenTK.Windowing.Common;
 using OpenTK.Windowing.Desktop;
+using OpenTK.Windowing.GraphicsLibraryFramework;
 
 namespace Rendering.UI
 {
@@ -14,7 +15,7 @@ namespace Rendering.UI
 
         public UIWindow(GameWindowSettings gameWindowSettings, NativeWindowSettings nativeWindowSettings) : base(gameWindowSettings, nativeWindowSettings)
         {
-
+            GL.LoadBindings(new GLFWBindingsContext());
         }
 
         protected override void OnLoad()
