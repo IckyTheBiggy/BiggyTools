@@ -198,7 +198,7 @@ namespace Rendering.UI
             if (status == 0)
             {
                 string infoLog = GL.GetProgramInfoLog(program);
-                Logger.LogError($"Background3D::Error linking shader program: {infoLog}");
+                Logger.LogError($"Error linking shader program: {infoLog}");
             }
         }
     }

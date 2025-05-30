@@ -1,6 +1,7 @@
 using System.Drawing;
 using System.Globalization;
 using System.Numerics;
+using BiggyTools.Debugging;
 using ImGuiNET;
 using Newtonsoft.Json.Linq;
 using static ImGuiNET.ImGui;
@@ -117,15 +118,53 @@ namespace Rendering.UI
         public static Dictionary<string, Vector4> LoadJsonColors(string path)
         {
             var colorDict = new Dictionary<string, Vector4>();
-            var json = JObject.Parse(File.ReadAllText(path));
 
-            var colors = (JObject)json["colors"];
-            foreach (var kvp in colors)
+            try
             {
-                string key = kvp.Key;
-                string hex = kvp.Value.ToString();
-                var colorVec = HexToVec4(hex);
-                colorDict[key] = colorVec;
+                var json = JObject.Parse(File.ReadAllText(path));
+
+                if (json != null && json.ContainsKey("colors"))
+                {
+                    var colors = (JObject?)json["colors"];
+
+                    if (colors != null)
+                    {
+                        foreach (var kvp in colors)
+                        {
+                            string key = kvp.Key;
+                            string hex = kvp.Value?.ToString() ?? string.Empty;
+                            var colorVec = HexToVec4(hex);
+                            colorDict[key] = colorVec;
+                        }
+
+                        return colorDict;
+                    }
+
+                    else
+                    {
+                        Logger.LogWarning($"Colors Property in '{path}' is not a valid JSON object");
+                    }
+                }
+
+                else
+                {
+                    Logger.LogWarning($"Colors property not found in '{path}' or JSON in null/empty");
+                }
+            }
+
+            catch (FileNotFoundException)
+            {
+                Logger.LogError($"File not found at '{path}'");
+            }
+
+            catch (Newtonsoft.Json.JsonReaderException ex)
+            {
+                Logger.LogError($"Error parsing JSON from '{path}': {ex.Message}");
+            }
+
+            catch (Exception ex)
+            {
+                Logger.LogError($"An unexpected error occured while loading colors from '{path}': {ex.Message}");
             }
 
             return colorDict;
