@@ -8,38 +8,8 @@ namespace BiggyTools
 {
     class Program
     {
-        static NativeWindowSettings nativeWindowSettings = new NativeWindowSettings
-        {
-            ClientSize = new Vector2i(800, 600),
-            Title = "BiggyTools"
-            //AutoLoadBindings = false
-        };
-
-        private static bool _useGui;
-
         public static void Main(string[] args)
         {
-            if (args.Length != 1)
-            {
-                Console.WriteLine("Usage: BiggyTools --tui | --gui | --help");
-                return;
-            }
-
-            string arg = args[0].ToLower();
-
-            switch (arg)
-            {
-                case "--tui":
-                    _useGui = false;
-                    break;
-                case "--gui":
-                    _useGui = true;
-                    break;
-                case "--help":
-                    PrintHelp();
-                    break;
-            }
-
             while (true)
             {
                 var option = AnsiConsole.Prompt(
@@ -48,7 +18,6 @@ namespace BiggyTools
                 .PageSize(10)
                 .AddChoices(new[] {
                     "Re-Encode Video",
-                    "UI",
                     "Exit"
                 }));
 
@@ -56,12 +25,6 @@ namespace BiggyTools
                 {
                     case "Re-Encode Video":
                         FFmpeg.Utils.StartRencode();
-                        break;
-
-                    case "UI":
-                        UIWindow uIWindow = new UIWindow(GameWindowSettings.Default, nativeWindowSettings);
-                        uIWindow.MinimumSize = new Vector2i(600, 350);
-                        uIWindow.Run();
                         break;
 
                     case "Exit":
